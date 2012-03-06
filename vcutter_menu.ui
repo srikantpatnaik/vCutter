@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>696</width>
+    <height>297</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="mainwidget">
+   <widget class="QLabel" name="header">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>391</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="text">
+     <string>  Video editing application tailored for Spoken Tutorials</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="execute">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>210</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>execute</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>436</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QRadioButton" name="one">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="convertthis">
+       <property name="text">
+        <string>1.  Convert this </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="video_1_1">
+       <property name="text">
+        <string>video</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="intothis">
+       <property name="text">
+        <string>into this </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="vformat">
+       <item>
+        <property name="text">
+         <string>format</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>wmv</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>mp4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>avi</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="andkeepit">
+       <property name="text">
+        <string>and keep it</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="here_1">
+       <property name="text">
+        <string>here</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>514</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QRadioButton" name="two">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="addthis">
+       <property name="text">
+        <string>2.  Add this </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="video_2_1">
+       <property name="text">
+        <string>video</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="atthe">
+       <property name="text">
+        <string>at the </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="end">
+       <item>
+        <property name="text">
+         <string>end</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>beginning</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="ofthis">
+       <property name="text">
+        <string>of this</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="video_2_2">
+       <property name="text">
+        <string>video</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="andkeepit_2">
+       <property name="text">
+        <string>and keep it</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="here_2">
+       <property name="text">
+        <string>here</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>161</y>
+      <width>640</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QRadioButton" name="three">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="cutthis">
+       <property name="text">
+        <string>3.  Cut this </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="video_3_1">
+       <property name="text">
+        <string>video</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="from_text">
+       <property name="text">
+        <string>from</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="from_time"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="to_text">
+       <property name="text">
+        <string>to</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="to_2"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="andinsertthis">
+       <property name="text">
+        <string>&amp; insert this</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="videoclip">
+       <property name="text">
+        <string>video clip</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="inplaceofit">
+       <property name="text">
+        <string>in place of it, join</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="here_3">
+       <property name="text">
+        <string>here</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>696</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
