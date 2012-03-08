@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>297</height>
+    <width>771</width>
+    <height>250</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QLabel" name="header">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>170</x>
       <y>10</y>
       <width>391</width>
       <height>20</height>
@@ -42,36 +42,16 @@
      <enum>Qt::RichText</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="execute">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>210</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>execute</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
+      <x>21</x>
       <y>60</y>
-      <width>436</width>
+      <width>483</width>
       <height>26</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QRadioButton" name="one">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="QLabel" name="convertthis">
        <property name="text">
@@ -110,11 +90,6 @@
          <string>mp4</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>avi</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item>
@@ -131,25 +106,34 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="execute1">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>execute</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>21</x>
       <y>110</y>
-      <width>514</width>
+      <width>562</width>
       <height>26</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QRadioButton" name="two">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="QLabel" name="addthis">
        <property name="text">
@@ -173,6 +157,11 @@
      </item>
      <item>
       <widget class="QComboBox" name="end">
+       <item>
+        <property name="text">
+         <string>select</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>end</string>
@@ -213,25 +202,34 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="execute2">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>execute</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>21</x>
-      <y>161</y>
-      <width>640</width>
+      <x>22</x>
+      <y>162</y>
+      <width>688</width>
       <height>26</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QRadioButton" name="three">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="QLabel" name="cutthis">
        <property name="text">
@@ -294,6 +292,22 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="execute3">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>execute</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -302,7 +316,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>696</width>
+     <width>771</width>
      <height>21</height>
     </rect>
    </property>
