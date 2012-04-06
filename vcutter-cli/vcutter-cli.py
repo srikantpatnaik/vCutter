@@ -1,4 +1,4 @@
-#!/usr/bin/python env
+#!/usr/bin/python -tt
 """
    This application simplifies your video editing job by providing you neat
    set of commands to cut,join or insert any video.
@@ -9,7 +9,7 @@
    $ vcutter inVideo.ogv outVideo.webm
 
 
-   2.Add(-a) a video at the beginning(-b) or end(-e) of other video and stich
+   2.Add(-a) a video at the beginning(-b) or end(-e) of other video and stitch
      them as output(-o) video. 
    $ vcutter -a smallClip.ogv -b  OrigVideo.ogv -o smallClipOrigVideo.ogv
                 (inVideo)         (inVideo)        (outVideo)
@@ -53,55 +53,69 @@
 
 import argparse
 import sys
+from  lib.terminalColor import color
 
+descriptionStr = "%s simplifies your video editing job by providing you neat\
+set of commands to cut,join or covert any video." %(color.cyan("vCutter"))
 
-parser = argparse.ArgumentParser(description ='This application simplifies your\
-                                video editing job by providing you neat\
-                                set of commands to cut,join or covert any video.',
-                                prefix_chars = '-',
-                                add_help = True)
+parser = argparse.ArgumentParser(prog = "vCutter", description = descriptionStr,
+                                 epilog="Epilog goes here",
+                                 prefix_chars = '-',
+                                 add_help = True)
 
-parser.add_argument('-a',
-                    type = str, 
-                    help = 'add: Enables adding a video in beginning or end of\
-                    other video')
+parser.add_argument('-a','--add',
+                    metavar = '',
+                    type = argparse.FileType('r'),
+                    help = 'add: Enables adding a video in beginning or end of other video')
 
-parser.add_argument('-c',
-                    type = str,
+parser.add_argument('-c','--cut',
+                    metavar = '',
+                    type = argparse.FileType('r'),
                     help = 'cut: cut the video at specified time')
 
 parser.add_argument('inVideofile',
+                    action = 'store',
                     nargs='?',
                     type=argparse.FileType('r'),
-                    default=sys.stdin,
                     help = 'file name or path of the input video')
 
-parser.add_argument('-b',
-                    type = str,
+parser.add_argument('-b','--beginning',
+                    metavar = '',
+                    type = argparse.FileType('r'),
                     help = 'beginning: add in the beginning')
 
-parser.add_argument('-e',
-                    type = str,
+parser.add_argument('-e','--end',
+                    metavar = '',
+                    type = argparse.FileType('r'),
                     help = 'end: add at the end')
 
-parser.add_argument('-t1',
-                    type = str,
-                    help = 'time1: cut from')
+parser.add_argument('-i','--insert',
+                    metavar = '',
+                    type = argparse.FileType('r'),
+                    help = 'beginning: add in the beginning')
 
-parser.add_argument('-t2',
+parser.add_argument('-t','--time',
+                    dest = 'time',
                     type = str,
-                    help = 'time2: cut upto')
+                    metavar = '',
+                    nargs = 2,
+                    default = False,
+                    help = 'start_time, end_time')
 
 parser.add_argument('inVideofile',
+                    action = 'store',
                     nargs='?',
                     type=argparse.FileType('r'),
-                    default=sys.stdin,
                     help = 'file name or path of the input video')
 
-parser.add_argument('-o',
-                    type = str,
+parser.add_argument('-o','--out',
+                    metavar = '',
+                    type = argparse.FileType('w'),
                     help = 'output: output video')
 
+parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+
+"""
 parser.add_argument('-s',
                     type = str,
                     help = 'save: save the cut portion')
@@ -115,6 +129,21 @@ parser.add_argument('outVideofile',
                     type=argparse.FileType('w'),
                     default=sys.stdout,
                     help = 'file name or path of the output video')
+
+"""
 args = parser.parse_args()
 print parser.print_help()
+print ""
+print "===================="
+print ""
+print '--add =', args.add
+print '--cut =', args.cut
+print '--time =', args.time
+print '--beg =', args.beginning
+print '--end =', args.end
+print '--out = ', args.out
+print '--insert = ', args.insert
+print '--inVideofile =', args.inVideofile
+
+
 
