@@ -62,7 +62,7 @@ class argParse:
     
         parser.add_argument('-o','--out',
                             metavar = '',
-                            type = argparse.FileType('w'),
+                            ## Removed FileType('w'),creates file unnecessary
                             help = 'output: output video')
         
         parser.add_argument('--version', action='version', version='%(prog)s 1.0')

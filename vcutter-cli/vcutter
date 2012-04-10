@@ -3,6 +3,7 @@
 import arguements
 import os
 import sys
+from subprocess import Popen, PIPE
 
 
 def selectOperation():
@@ -20,7 +21,8 @@ def processOption_1(cliArgs_list):
     ## Need to remove '-o', ffmpeg is smart enough
     ## Presently works with 'ogv','wmv','avi'. Need to work on others
     execute = 'ffmpeg ' + finalArgs.replace('-o','')  
-    os.system(execute)
+    Popen(execute,shell=True, stdout=PIPE).stdout
+#    os.system(execute)
 
 
 
