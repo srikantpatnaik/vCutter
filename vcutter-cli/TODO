@@ -1,0 +1,6 @@
+TODO
+====
+
+1. --cut/-c should give error if time(-t) is not provided.
+
+#.

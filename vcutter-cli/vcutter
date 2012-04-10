@@ -1,4 +1,39 @@
 #!/usr/bin/python -tt
 
 import arguements
+import os
+import sys
 
+
+def selectOperation():
+    argsObj = arguements.argParse()               #create object of argParse class
+    cliArgs_list = argsObj.parse()                #catching return value of the fn
+    flag = 'Option_%s' %(cliArgs_list[0])
+    eval('process'+ flag + '(cliArgs_list)')      #calling a fn based on 1st integer arg
+
+
+
+def processOption_1(cliArgs_list):
+    mustFlags = ['-o', '-i']                      #recommended flags for this option, in reverse order 
+    finalArgs = doubleCheck(mustFlags, cliArgs_list)
+    ## Now dirty irregular work
+    ## Need to remove '-o', ffmpeg is smart enough
+    ## Presently works with 'ogv','wmv','avi'. Need to work on others
+    execute = 'ffmpeg ' + finalArgs.replace('-o','')  
+    os.system(execute)
+
+
+
+def doubleCheck(mustFlags, cliArgs_list):
+    ## The 'if' stmt is to check for correctness of user entered flags
+    if not mustFlags == list(set(cliArgs_list) & set(mustFlags)):
+        print 'Flags mismatch. Please see --help for examples.'
+        sys.exit(1)
+    else:
+        cliArgs_string = ' '.join(cliArgs_list[1:])   # excluding first select option arg
+    return cliArgs_string
+
+
+
+if __name__ == "__main__":
+    selectOperation()
