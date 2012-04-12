@@ -12,7 +12,6 @@ def selectOperation():
     flag = 'Option_%s' %(cliArgs_list[0])
     exec('process'+ flag + '(cliArgs_list)')      #calling a fn based on 1st integer arg
 
-
 def processOption_1(cliArgs_list):
     mustFlags = ['-o', '-i']                      #recommended flags for this option, in reverse order 
     finalArgs = doubleCheck(mustFlags, cliArgs_list)
@@ -31,7 +30,6 @@ def processOption_2(cliArgs_list):
     finalArgs.insert(0,'ffmpeg')
     print finalArgs
     Popen(finalArgs,stdout=PIPE)
-
     
 def processOption_3(cliArgs_list):
     mustFlags = ['-o', '-i']                      #recommended flags for this option, in reverse order 
@@ -42,9 +40,6 @@ def processOption_3(cliArgs_list):
     print cliArgs_list
     stdOut = Popen(cliArgs_list,stdout=PIPE)
 
- 
-
-
 def doubleCheck(mustFlags, cliArgs_list):
     ## The 'if' stmt is to check for correctness of user entered flags
     if not mustFlags == list(set(cliArgs_list) & set(mustFlags)):
@@ -54,8 +49,6 @@ def doubleCheck(mustFlags, cliArgs_list):
         cliArgs_list = cliArgs_list[1:]   # excluding first select option arg
         cliArgs_list.remove('-o')
     return cliArgs_list
-
-
 
 if __name__ == "__main__":
     selectOperation()

@@ -68,6 +68,10 @@ class argParse:
         parser.add_argument('--version', action='version', version='%(prog)s 1.0')
         
         if len(sys.argv) <= 4:
+            print "Wrong number of arguments passed"
+            print "Need atleast 5 arguments."
+            print "Please type: vcutter --help (for help and examples)"
+        elif sys.argv[1] == '--help' or sys.argv[1] == '-h':
             parser.print_help()
             os.system('cat examples.txt')
             parser.exit()
