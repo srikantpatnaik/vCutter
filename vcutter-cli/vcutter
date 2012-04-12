@@ -4,26 +4,45 @@ import arguements
 import os
 import sys
 from subprocess import Popen, PIPE
-
+import subprocess
 
 def selectOperation():
     argsObj = arguements.argParse()               #create object of argParse class
     cliArgs_list = argsObj.parse()                #catching return value of the fn
     flag = 'Option_%s' %(cliArgs_list[0])
-    eval('process'+ flag + '(cliArgs_list)')      #calling a fn based on 1st integer arg
-
+    exec('process'+ flag + '(cliArgs_list)')      #calling a fn based on 1st integer arg
 
 
 def processOption_1(cliArgs_list):
     mustFlags = ['-o', '-i']                      #recommended flags for this option, in reverse order 
     finalArgs = doubleCheck(mustFlags, cliArgs_list)
-    ## Now dirty irregular work
-    ## Need to remove '-o', ffmpeg is smart enough
+    ## Now dirty irregular work, need to remove '-o', ffmpeg is smart enough
     ## Presently works with 'ogv','wmv','avi'. Need to work on others
-    execute = 'ffmpeg ' + finalArgs.replace('-o','')  
-    Popen(execute,shell=True, stdout=PIPE).stdout
-#    os.system(execute)
+#    finalArgs.remove('-o')
+    finalArgs.insert(0,'ffmpeg')
+    print finalArgs
+    Popen(finalArgs)
+   # subprocess.call(finalArgs, shell=True)
 
+def processOption_2(cliArgs_list):
+    mustFlags = ['-o', '-b', '-a']                      #recommended flags for this option, in reverse order 
+    finalArgs = doubleCheck(mustFlags, cliArgs_list)
+    finalArgs.remove('-o')
+    finalArgs.insert(0,'ffmpeg')
+    print finalArgs
+    Popen(finalArgs,stdout=PIPE)
+
+    
+def processOption_3(cliArgs_list):
+    mustFlags = ['-o', '-i']                      #recommended flags for this option, in reverse order 
+    finalArgs = doubleCheck(mustFlags, cliArgs_list)
+    cliArgs_list = cliArgs_list[1:]
+    cliArgs_list.remove('-o')
+    cliArgs_list.insert(0,'ffmpeg')
+    print cliArgs_list
+    stdOut = Popen(cliArgs_list,stdout=PIPE)
+
+ 
 
 
 def doubleCheck(mustFlags, cliArgs_list):
@@ -32,8 +51,9 @@ def doubleCheck(mustFlags, cliArgs_list):
         print 'Flags mismatch. Please see --help for examples.'
         sys.exit(1)
     else:
-        cliArgs_string = ' '.join(cliArgs_list[1:])   # excluding first select option arg
-    return cliArgs_string
+        cliArgs_list = cliArgs_list[1:]   # excluding first select option arg
+        cliArgs_list.remove('-o')
+    return cliArgs_list
 
 
 
