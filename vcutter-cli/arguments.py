@@ -69,7 +69,10 @@ class argParse:
         
         if len(sys.argv) <= 4:
             parser.print_help()
-            os.system('cat examples.txt')
+            f = open('examples.txt','r')
+            line = f.read()
+            print line.strip('\n')
+            f.close()
             parser.exit()
         else:    
             parser.parse_args()             # This will check the validity of options
