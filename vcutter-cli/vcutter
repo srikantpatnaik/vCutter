@@ -52,7 +52,7 @@ def processOption_5(cliArgs_list):
     print timeInterval
     execute1         = 'ffmpeg -i ' + toBeCutFile  + ' .rawtoBeCutFile.mpg'
     execute2         = 'ffmpeg -i ' + '.rawtoBeCutFile.mpg ' + '-sameq -ss ' + timeInterval1 \
-                        + ' -t ' + timeInterval2 ' + ' '.rawCutfile.mpg'
+                        + ' -t ' + timeInterval2 +  ' .rawCutfile.mpg'
     execute3         = 'ffmpeg -i .rawCutfile.mpg ' + '-o ' + outputFile
     execute4         = 'rm .rawtoBeCutFile.mpg .rawCutfile.mpg' 
     os.system(execute1)
