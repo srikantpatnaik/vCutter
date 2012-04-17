@@ -19,7 +19,7 @@ $ vcutter 3 -c testVideo.ogv -t 23:59:55 23:59:59 -I newClip.ogv -o newVideo.ogv
 $ vcutter 4 -c testVideo.ogv -t 23:59:55 23:59:59 -o newVideo.ogv 
                 (inVideo)                              (outVideo) 
         
-5.Cut(-c) from (hh:mm:ss) to (hh:mm:yy) duration of testVideo and cut clip as newVideo. 
+5.Cut(-c) from (hh:mm:ss) to (hh:mm:yy) duration of testVideo and save cut clip as newVideo. 
 $ vcutter 5 -c testVideo.ogv -t1 23:59:55 23:59:59 -s -o  newVideo.ogv 
                 (inVideo)                                   (outVideo)
                 
