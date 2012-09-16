@@ -14,17 +14,17 @@
 
    3.Cut and replace clip from testVideo at duration (t1) to (t2) and insert
      newClip in place of it, stich them as newVideo(-o) video.
-   $ vcutter -c testVideo.ogv -t1 23:59:55 -t2 23:59:59 -i newClip.ogv -o newVideo.ogv 
+   $ vcutter -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -i newClip.ogv -o newVideo.ogv 
                 (inVideo)                                  (inVideo)      (outVideo)
 
    4.Cut(-c) the clip from (-t1) to (-t2) duration of testVideo and stich back 
      the remaining portion as output(-o) video.
-   $ vcutter -c testVideo.ogv -t1 23:59:55 -t2 23:59:59 -o newVideo.ogv 
+   $ vcutter -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o newVideo.ogv 
                 (inVideo)                                  (outVideo) 
 
 
    5.Cut(-c) from (-t1) to (-t2) duration of testVideo and cut clip as newVideo. 
-   $ vcutter -c testVideo.ogv -t1 23:59:55 -t2 23:59:59 -s -o  newVideo.ogv 
+   $ vcutter -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o  newVideo.ogv 
                 (inVideo)                                      (outVideo)
                 
    6.Covert all videos in a directory to certain format.
@@ -40,7 +40,6 @@
      -c -> cut the clip
      -t1 & -t2 -> time in hh:mm:ss
      -o -> output video
-     -s -> save the cut portion
      -i -> insert the new clip
      -f -> give the output video format(eg: ogv, mp4, avi etc)
 
