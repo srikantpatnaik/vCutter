@@ -4,27 +4,27 @@
    Examples for each option:
    -------------------------
    1.Convert/Encode inVideo to outVideo.Must give extension to OutVideo.
-   $ vcutter inVideo.ogv outVideo.webm
+   $ vcutter 1 -i inVideo.ogv -o outVideo.webm
 
 
    2.Add(-a) a video at the beginning(-b) or end(-e) of other video and stitch
      them as output(-o) video. 
-   $ vcutter -a smallClip.ogv -b  OrigVideo.ogv -o smallClipOrigVideo.ogv
+   $ vcutter 2 -a smallClip.ogv -b  OrigVideo.ogv -o smallClipOrigVideo.ogv
                 (inVideo)         (inVideo)        (outVideo)
 
    3.Cut and replace clip from testVideo at duration (t1) to (t2) and insert
      newClip in place of it, stich them as newVideo(-o) video.
-   $ vcutter -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -i newClip.ogv -o newVideo.ogv 
+   $ vcutter 3 -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -i newClip.ogv -o newVideo.ogv 
                 (inVideo)                                  (inVideo)      (outVideo)
 
    4.Cut(-c) the clip from (-t1) to (-t2) duration of testVideo and stich back 
      the remaining portion as output(-o) video.
-   $ vcutter -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o newVideo.ogv 
+   $ vcutter 4 -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o newVideo.ogv 
                 (inVideo)                                  (outVideo) 
 
 
    5.Cut(-c) from (-t1) to (-t2) duration of testVideo and cut clip as newVideo. 
-   $ vcutter -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o  newVideo.ogv 
+   $ vcutter 5 -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o  newVideo.ogv 
                 (inVideo)                                      (outVideo)
                 
    6.Covert all videos in a directory to certain format.
@@ -38,7 +38,7 @@
      -b -> beginning
      -e -> end
      -c -> cut the clip
-     -t1 & -t2 -> time in hh:mm:ss
+     -t1 & -t2 -> time in hh:mm:ss.milliseconds
      -o -> output video
      -i -> insert the new clip
      -f -> give the output video format(eg: ogv, mp4, avi etc)
