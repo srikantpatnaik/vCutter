@@ -5,21 +5,21 @@ $ vcutter 1 -i inVideo.ogv -o outVideo.webm
 2.Add(-a) a video at the beginning(-b) or end(-e) of other video and stich
   them as output(-o) video. 
 $ vcutter 2 -a smallClip.ogv -b  OrigVideo.ogv -o smallClipOrigVideo.ogv
-                (inVideo)         (inVideo)        (outVideo)
+                (inVideo)         (inVideo)         (outVideo)
 
 3.Cut and replace clip from testVideo at duration (hh:mm:ss) to (hh:mm:yy) and insert
   newClip in place of it, stich them as newVideo(-o) video.
 $ vcutter 3 -c testVideo.ogv -t 23:59:55.00 23:59:59.00 -I newClip.ogv -o newVideo.ogv 
-               (inVideo)                              (inVideo)      (outVideo)
+               (inVideo)                                  (inVideo)      (outVideo)
        
 4.Cut(-c) the clip from (hh:mm:ss) to (hh:mm:yy) duration of testVideo and stich back 
   the remaining portion as output(-o) video.
 $ vcutter 4 -c testVideo.ogv -t 23:59:55.00 23:59:59.00 -o newVideo.ogv 
-                (inVideo)                              (outVideo) 
+                (inVideo)                                  (outVideo) 
         
 5.Cut(-c) from (hh:mm:ss) to (hh:mm:yy) duration of testVideo and save cut clip as newVideo. 
 $ vcutter 5 -c testVideo.ogv -t1 23:59:55.00 23:59:59.00 -o newVideo.ogv 
-                (inVideo)                             (outVideo)
+                (inVideo)                                   (outVideo)
                 
 6.Covert all videos in a directory to certain format.
 $ vcutter 6 sourceDir -f mp4  destDir
