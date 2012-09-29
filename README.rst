@@ -44,11 +44,6 @@ Examples for each option
        $ ./vcutter.py 5 -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o  newVideo.ogv 
                            (inVideo)                                         (outVideo)
                 
-#. Covert all videos in a directory to certain format. ::
-
-       $ vcutter sourceDir -f mp4  destDir
-                 (inVideo)        (outVideo)
-
 
 
 ---------   

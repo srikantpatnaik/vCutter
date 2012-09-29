@@ -9,10 +9,9 @@ class argParse:
     def parse(self):
 
         descriptionStr = "vCutter simplifies your video editing job by providing you neat\
-        set of commands to cut,join or covert any video."
+        set of commands to cut, join or covert any video."
         
         parser = argparse.ArgumentParser(prog = "vCutter", description = descriptionStr,
-                                         epilog="Epilog goes here",
                                          prefix_chars = '-',
                                          add_help = True)
         parser.add_argument('select',
@@ -69,10 +68,11 @@ class argParse:
         
         if len(sys.argv) <= 4:
             parser.print_help()
-            f = open('examples.txt','r')
-            line = f.read()
-            print line.strip('\n')
-            f.close()
+           # f = open('examples.txt','r')
+           # line = f.read()
+           # print line.strip('\n')
+           # f.close()
+            print "\n\nPlease check README for examples. "
             parser.exit()
         else:    
             parser.parse_args()             # This will check the validity of options
