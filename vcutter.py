@@ -1,125 +1,134 @@
-from PyQt4 import QtCore,QtGui  
-import vcutter_menu,os,sys
+#!/usr/bin/python -tt
 
-class vcutter(QtGui.QMainWindow):
-    def __init__(self):
-        QtGui.QMainWindow.__init__(self)
-        uifile = vcutter_menu.Ui_MainWindow()
-        uifile.setupUi(self)
+import arguments
+import os
+import sys
+import time
+from datetime import datetime
+from subprocess import Popen, PIPE
 
-        self.connect(uifile.video_1_1,QtCore.SIGNAL("clicked()"),self.inputFile)
-        self.connect(uifile.vformat,QtCore.SIGNAL("activated(int)"),self.changeFormat)
-        self.connect(uifile.here_1,QtCore.SIGNAL("clicked()"),self.outputFile)
-        self.connect(uifile.execute1,QtCore.SIGNAL("clicked()"),self.convertOne)
-        self.vformatImported = uifile.vformat
+def selectOperation():
+    argsObj          = arguments.argParse()  #create object of argParse class
+    cliArgs_list     = argsObj.parse()       #catching return value of the fn
+    flag = 'Option_%s' %(cliArgs_list[0])
+    exec('process'+ flag + '(cliArgs_list)') #calling a fn based on 1st integer arg
 
-        self.connect(uifile.video_2_1,QtCore.SIGNAL("clicked()"),self.inputFile)  
-        self.connect(uifile.end,QtCore.SIGNAL("activated(int)"),self.beginningEnd)
-        self.connect(uifile.video_2_2,QtCore.SIGNAL("clicked()"),self.clipingFile)
-        self.connect(uifile.here_2,QtCore.SIGNAL("clicked()"),self.outputFile)
-        self.connect(uifile.execute2,QtCore.SIGNAL("clicked()"),self.convertTwo)
-        self.endImported = uifile.end
-        
-        self.connect(uifile.video_3_1,QtCore.SIGNAL("clicked()"),self.inputFile)  
-        self.connect(uifile.videoclip,QtCore.SIGNAL("clicked()"),self.clipingFile) 
-        self.connect(uifile.here_3,QtCore.SIGNAL("clicked()"),self.outputFile)     
-        self.connect(uifile.execute3,QtCore.SIGNAL("clicked()"),self.convertThree)
-        self.connect(uifile.time_from, QtCore.SIGNAL('textEdited(QString)'), self.grabFrom)        
-        self.connect(uifile.time_to, QtCore.SIGNAL('textEdited(QString)'), self.grabto)        
-
-        self.connect(uifile.video_4_1,QtCore.SIGNAL("clicked()"),self.inputFile)  
-        self.connect(uifile.here_4,QtCore.SIGNAL("clicked()"),self.outputFile)     
-#        self.connect(uifile.execute4,QtCore.SIGNAL("clicked()"),self.convertFour)
-        self.connect(uifile.time_from_4, QtCore.SIGNAL('textEdited(QString)'), self.grabFrom)        
-        self.connect(uifile.time_to_4, QtCore.SIGNAL('textEdited(QString)'), self.grabto)        
-
-        self.connect(uifile.video_5_1,QtCore.SIGNAL("clicked()"),self.inputFile)  
-        self.connect(uifile.here_5,QtCore.SIGNAL("clicked()"),self.outputFile)     
-        self.connect(uifile.execute5,QtCore.SIGNAL("clicked()"),self.convertFive)
-        self.connect(uifile.time_from_5, QtCore.SIGNAL('textEdited(QString)'), self.grabFrom)        
-        self.connect(uifile.time_to_5, QtCore.SIGNAL('textEdited(QString)'), self.grabto)        
-
-#################################  1.  Video conversions    ################################################
-
-    def inputFile(self):
-        global infile
-        infile=QtGui.QFileDialog.getOpenFileName(self,"Open Video File",QtCore.QDir.homePath(),"Any Files (*.*)")
-
-    def outputFile(self):
-        global outfile
-        outfile=QtGui.QFileDialog.getOpenFileName(self,"Open Video File",QtCore.QDir.homePath(),"Any Files (*.*)")
-
-    def changeFormat(self):
-        global fmt
-        fmt = self.vformatImported.currentText()
-
-    def convertOne(self):
-        text= str('ffmpeg -i ' + infile + ' ' + outfile + '.' + fmt)
-        os.system(text)
-        print 'done conversion'
-
-        
-################################  2.  Adding video at the end/beginning of other video ######################
+def convert(infile, outfile):
+    if '.ogv' in outfile:
+        os.system('ffmpeg2theora ' + infile + ' -o ' + outfile)
+    else:
+        os.system('ffmpeg -y -i  ' + infile + ' ' + outfile)
 
 
-    """ inputFile & outputFile functions are same hence used from above """
-
-    def clipingFile(self):
-        global clipfile
-        clipfile=QtGui.QFileDialog.getOpenFileName(self,"Open Video File",QtCore.QDir.homePath(),"Any Files (*.*)")
-
-    def beginningEnd(self):
-        global beginEnd
-        beginEnd = self.endImported.displayText()
-
-    def convertTwo(self):
-        if beginEnd == 'end':
-            vAdd = str('mencoder -oac copy -ovc copy -idx ' + clipfile + ' ' + infile + ' -o ' + outfile)
-        elif beginEnd == 'beginning':
-            vAdd = str('mencoder -oac copy -ovc copy -idx ' + infile + ' ' + clipfile + ' -o ' + outfile)
-        os.system(vAdd)
-        print 'stiching done !'
-            
-
-################################  3.  Cutting and inserting new video      ##################################
-
-     
-    def grabFrom(self,fromStringImported):    # As textChanged(QString) passes an arguement.
-        global t1
-        t1 = fromStringImported
-        return t1
-
-    def grabto(self,toStringImported):
-        global t2
-        t2 = toStringImported
-        return t2
-        
-    def convertThree(self):
-        text= str('ffmpeg -i ' + infile + ' -sameq -ss ' + t1 + ' -t ' + t2 + ' ' + outfile)
-        os.system(text)
-        print 'done conversion'
+def cutVideo(videoTobeCut, initialTime, finalTime, outputVideo):
+    timeDifference = diffTime(initialTime, finalTime)
+    os.system('ffmpeg -y -i ' + videoTobeCut + ' -sameq -ss ' \
+               + initialTime + ' -t ' + timeDifference + ' ' + outputVideo)
 
 
+def joinVideo(*anyNumberOfVideos):
+    #the last name should be output video name
+    videosToBeAdded = ''
+    anyNumberOfVideos = list(anyNumberOfVideos)
+    anyNumberOfVideos.reverse()
+    for eachVideo in anyNumberOfVideos[1:]:
+        videosToBeAdded = eachVideo + ' ' + videosToBeAdded
+    os.system('mpgtx -j ' + videosToBeAdded + ' -o ' + anyNumberOfVideos[0])
+
+def getTotalTime(videoName):
+    findLength = "ffmpeg -i %s 2>&1 | grep Duration | cut -d ' ' -f 4 |sed s/,//"\
+                    %(videoName)
+    return Popen(findLength, shell=True, stdout=PIPE).stdout.read().strip('\n')                    
 
 
-###############################  4. stich back original video after removing unwanted part ###################
+def diffTime(initialTime, finalTime):
+    fmt = '%H:%M:%S.%f'
+    tdelta = datetime.strptime(finalTime,fmt) - datetime.strptime(initialTime,fmt)
+    return time.strftime('%H:%M:%S.%f', time.gmtime(tdelta.seconds))
+
+###############################################################################
+
+def processOption_1(cliArgs_list):
+    ## eg: vcutter 1 -i inVideo.ogv -o outVideo.webm
+    ## Presently works with 'ogv','wmv','avi'. Need to work on others
+    mustFlags = ['-i', '-o']   #recommended flags for this option
+    finalArgs = doubleCheck(mustFlags, cliArgs_list)
+    convert(cliArgs_list[cliArgs_list.index('-i') + 1],\
+            cliArgs_list[cliArgs_list.index('-o') + 1])
 
 
-###############################  5. save the removed portion as new video ####################################
+def processOption_2(cliArgs_list):
+    ## eg: vcutter 2 -a smallClip.ogv -b  OrigVideo.ogv -o smallClipOrigVideo.ogv
+    ## only works with same aspect ratio videos, which is always true in case of ST
+    if '-b' in cliArgs_list:
+        mustFlags = ['-a', '-b', '-o']
+        finalArgs = doubleCheck(mustFlags, cliArgs_list)
+        convert(finalArgs[finalArgs.index('-a') + 1], '.rawTobeAddedVideo1.mpg')
+        convert(finalArgs[finalArgs.index('-b') + 1], '.rawTobeAddedVideo2.mpg')
+        joinVideo('.rawTobeAddedVideo1.mpg', '.rawTobeAddedVideo2.mpg', '.rawAddedVideo.mpg')        
+    elif '-e' in cliArgs_list:
+        mustFlags = ['-a', '-e', '-o']
+        finalArgs = doubleCheck(mustFlags, cliArgs_list)
+        convert(finalArgs[finalArgs.index('-a') + 1], '.rawTobeAddedVideo1.mpg')
+        convert(finalArgs[finalArgs.index('-e') + 1], '.rawTobeAddedVideo2.mpg')
+        joinVideo('.rawTobeAddedVideo2.mpg', '.rawTobeAddedVideo1.mpg', '.rawAddedVideo.mpg')        
+    convert('.rawAddedVideo.mpg', finalArgs[finalArgs.index('-o') + 1])
+    os.system('rm .raw*')
 
-    def convertFive(self):
-        text= str('ffmpeg -i ' + infile + ' -sameq -ss ' + t1 + ' -t ' + t2 + ' ' + outfile)
-        os.system(text)
-        print 'done editing'
+
+def processOption_3(cliArgs_list):
+    ## eg: vcutter 3 -c testVideo.ogv -t 23:59:55.00 23:59:59.00 -I newClip.ogv -o newVideo.ogv
+    ## works with mpg,flv and ogv only
+    mustFlags = ['-c', '-t', '-I', '-o']       #recommended flags for this option
+    finalArgs = doubleCheck(mustFlags, cliArgs_list)
+    convert(finalArgs[finalArgs.index('-c') + 1], '.rawtoBeCutFile.mpg')
+    convert(finalArgs[finalArgs.index('-I') + 1], '.rawtoBeInsertedFile.mpg')
+    cutVideo('.rawtoBeCutFile.mpg', '00:00:00.00', \
+             finalArgs[finalArgs.index('-t') + 1], ' .rawCutfile1.mpg')
+    cutVideo('.rawtoBeCutFile.mpg', finalArgs[finalArgs.index('-t') + 2], \
+             getTotalTime(finalArgs[finalArgs.index('-c') + 1]), ' .rawCutfile2.mpg')
+    joinVideo('.rawCutfile1.mpg', '.rawtoBeInsertedFile.mpg', '.rawCutfile2.mpg',\
+              '.rawAddedVideo.mpg')
+    convert('.rawAddedVideo.mpg', cliArgs_list[cliArgs_list.index('-o') + 1])
+    os.system('rm .raw*')
 
 
+def processOption_4(cliArgs_list):
+    ## eg: vcutter 4 -c testVideo.ogv -t 23:59:55.00 23:59:59.00 -o newVideo.ogv
+    mustFlags = ['-c', '-t', '-o']       #recommended flags for this option
+    finalArgs = doubleCheck(mustFlags, cliArgs_list)
+    convert(finalArgs[finalArgs.index('-c') + 1], '.rawtoBeCutFile.mpg')
+    cutVideo('.rawtoBeCutFile.mpg', '00:00:00.00', \
+             finalArgs[finalArgs.index('-t') + 1], ' .rawCutfile1.mpg')
+    cutVideo('.rawtoBeCutFile.mpg', finalArgs[finalArgs.index('-t') + 2], \
+             getTotalTime(finalArgs[finalArgs.index('-c') + 1]), ' .rawCutfile2.mpg')
+    joinVideo('.rawCutfile1.mpg', '.rawCutfile2.mpg', '.rawAddedVideo.mpg')
+    convert('.rawAddedVideo.mpg', cliArgs_list[cliArgs_list.index('-o') + 1])
+    os.system('rm .raw*')
 
 
-##############################################################################################################
+def processOption_5(cliArgs_list):
+    ## eg: vcutter 5 -c testVideo.ogv -t 23:59:55 23:59:59 -o newVideo.ogv
+    ## works with flv, ogv only
+    mustFlags = ['-c', '-t', '-o']       #recommended flags for this option
+    finalArgs = doubleCheck(mustFlags, cliArgs_list)
+    convert(finalArgs[finalArgs.index('-c') + 1], '.rawtoBeCutFile.mpg')
+    cutVideo('.rawtoBeCutFile.mpg', finalArgs[finalArgs.index('-t') + 1],\
+                finalArgs[finalArgs.index('-t') + 2], '.rawCutfile.mpg')
+    convert('.rawCutfile.mpg', finalArgs[finalArgs.index('-o') + 1])
+    os.system('rm .raw*')
+
+
+def doubleCheck(mustFlags, cliArgs_list):
+    ## The 'if' stmt is to check for correctness of user entered flags
+    comparedFlags = list(set(cliArgs_list) & set(mustFlags))
+    if not mustFlags.sort() == comparedFlags.sort():
+        print 'Flags mismatch. Please see --help for examples.'
+        sys.exit(1)
+    else:
+        cliArgs_list = cliArgs_list[1:]   # excluding first select option arg
+    return cliArgs_list
+
 
 if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
-    window = vcutter()
-    window.show()
-    sys.exit(app.exec_())
-
+    selectOperation()
