@@ -1,3 +1,6 @@
+**BUG**
+Option 3, 4, 5 are not working with 12.10 Ubuntu
+
 This application simplifies your video editing job by providing you neat
 set of commands to cut, join or insert any video.
                                                     

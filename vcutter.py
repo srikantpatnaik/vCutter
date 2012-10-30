@@ -104,7 +104,7 @@ def processOption_4(cliArgs_list):
              getTotalTime(finalArgs[finalArgs.index('-c') + 1]), ' .rawCutfile2.mpg')
     joinVideo('.rawCutfile1.mpg', '.rawCutfile2.mpg', '.rawAddedVideo.mpg')
     convert('.rawAddedVideo.mpg', cliArgs_list[cliArgs_list.index('-o') + 1])
-    os.system('rm .raw*')
+    #os.system('rm .raw*')
 
 
 def processOption_5(cliArgs_list):
