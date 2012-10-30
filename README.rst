@@ -20,29 +20,27 @@ Examples for each option
 
 
 #. Add(-a) a video at the beginning(-b) or end(-e) of other video and stitch
-   them as output(-o) video. ::
+   them as output(-o) video ::
     
         $ ./vcutter.py 2 -a smallClip.ogv -b  OrigVideo.ogv -o smallClipOrigVideo.ogv
                            (inVideo)            (inVideo)        (outVideo)
 
 
-#. Cut and replace clip from testVideo at duration (t1) to (t2) and insert
-   newClip in place of it, stich them as newVideo(-o) video. ::
+#. Cut and replace clip from testVideo and insert newClip in place of it, stich them as newVideo(-o) video ::
     
-        $ ./vcutter.py 3 -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -I newClip.ogv -o newVideo.ogv 
-                            (inVideo)                                          (inVideo)      (outVideo)
+        $ ./vcutter.py 3 -c testVideo.ogv -t 23:59:55.00  23:59:59.00 -I newClip.ogv -o newVideo.ogv 
+                            (inVideo)        (start time) (end time)      (inVideo)      (outVideo)
 
-#. Cut(-c) the clip from (-t1) to (-t2) duration of testVideo and stich back 
-   the remaining portion as output(-o) video. ::
+#. Cut(-c) clip of desired duration and stich back the remaining portion as output(-o) video ::
 
-       $ ./vcutter.py 4 -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o newVideo.ogv 
-                            (inVideo)                                        (outVideo) 
+       $ ./vcutter.py 4 -c testVideo.ogv -t 23:59:55.00  23:59:59.00 -o newVideo.ogv 
+                            (inVideo)       (start time) (end time)     (outVideo) 
 
 
-#. Cut(-c) from (-t1) to (-t2) duration of testVideo and cut clip as newVideo. ::
+#. Cut(-c) clip of desired duration and save the cut portion as newVideo ::
 
-       $ ./vcutter.py 5 -c testVideo.ogv -t1 23:59:55.00 -t2 23:59:59.00 -o  newVideo.ogv 
-                           (inVideo)                                         (outVideo)
+       $ ./vcutter.py 5 -c testVideo.ogv -t 23:59:55.00  23:59:59.00 -o  newVideo.ogv 
+                           (inVideo)        (start time) (end time)      (outVideo)
                 
 
 
