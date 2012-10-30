@@ -54,7 +54,7 @@ All flags
      -b -> beginning
      -e -> end
      -c -> cut the clip
-     -t1 & -t2 -> time in hh:mm:ss.msec
+     -t -> start time and end time in hh:mm:ss.msec
      -o -> output video
      -I -> insert a new clip
      -f -> give the output video format(eg: ogv, avi etc)
